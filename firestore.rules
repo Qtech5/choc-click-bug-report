@@ -1,0 +1,20 @@
+rules_version = '2';
+
+// No auth in this app — access is "whoever has the link" by design.
+// Reports and comments can be created/read/deleted by anyone; edits are
+// limited to the status field (so a stray client bug can't silently rewrite
+// a report's content).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /bugs/{bugId} {
+      allow read, create, delete: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['status']);
+
+      match /comments/{commentId} {
+        allow read, create, delete: if true;
+        allow update: if false;
+      }
+    }
+  }
+}

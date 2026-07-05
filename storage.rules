@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// No auth — anyone with the app can upload/view/delete attachments on a bug
+// report. Uploads capped at 50MB per file and restricted to image/video
+// content types; deletes are unrestricted (deleting a report deletes its
+// attachments from the client).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /bugs/{bugId}/{fileName} {
+      allow read: if true;
+      allow create: if request.resource.size < 50 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*|video/.*');
+      allow delete: if true;
+    }
+  }
+}

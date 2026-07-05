@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Submit a Bug — Chocolate Clicker</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header>
+  <h1>🍫 Chocolate Clicker — Bug Reports</h1>
+  <nav>
+    <a href="index.html">All Reports</a>
+    <a href="submit.html" class="active">Submit a Bug</a>
+  </nav>
+</header>
+<main>
+  <form id="submit-form" class="form">
+    <label for="name">Your name</label>
+    <input type="text" id="name" required />
+
+    <label for="title">Bug title</label>
+    <input type="text" id="title" required />
+
+    <label for="description">Description</label>
+    <textarea id="description" rows="6" required></textarea>
+
+    <label for="media">Photos / videos (optional)</label>
+    <input type="file" id="media" accept="image/*,video/*" multiple />
+
+    <button type="submit">Submit</button>
+  </form>
+</main>
+<script type="module" src="js/submit.js"></script>
+</body>
+</html>
