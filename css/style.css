@@ -49,6 +49,15 @@ main {
   padding: 1.5rem;
 }
 
+.home-section {
+  margin-bottom: 2rem;
+}
+
+.home-section h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem 0;
+}
+
 .bug-list,
 .idea-list {
   display: flex;

@@ -176,7 +176,7 @@ async function deleteIdea() {
     );
 
     await deleteDoc(doc(db, "ideas", ideaId));
-    window.location.href = "ideas.html";
+    window.location.href = "index.html";
   } catch (err) {
     alert("Failed to delete: " + err.message);
     deleteBtn.disabled = false;

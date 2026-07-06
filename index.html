@@ -3,22 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Chocolate Clicker — Bug Reports</title>
+<title>Chocolate Clicker — Bug Reports & Ideas</title>
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <header>
-  <h1>🍫 Chocolate Clicker — Bug Reports</h1>
+  <h1>🍫 Chocolate Clicker — Bug Reports & Ideas</h1>
   <nav>
-    <a href="index.html" class="active">All Reports</a>
+    <a href="index.html" class="active">Home</a>
     <a href="submit.html">Submit a Bug</a>
-    <a href="ideas.html">Ideas</a>
     <a href="submit-idea.html">Submit an Idea</a>
   </nav>
 </header>
 <main>
-  <div id="bug-list" class="bug-list"></div>
+  <section class="home-section">
+    <h2>Bug Reports</h2>
+    <div id="bug-list" class="bug-list"></div>
+  </section>
+
+  <section class="home-section">
+    <h2>Ideas</h2>
+    <div id="idea-list" class="idea-list"></div>
+  </section>
 </main>
 <script type="module" src="js/list.js"></script>
+<script type="module" src="js/ideas-list.js"></script>
 </body>
 </html>
