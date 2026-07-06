@@ -1,12 +1,16 @@
-import { db } from "./firebase.js";
+import { db, storage } from "./firebase.js";
 import {
   collection,
   query,
   orderBy,
+  where,
   getDocs,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { ref, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const listEl = document.getElementById("bug-list");
+const deleteFixedBtn = document.getElementById("delete-fixed-bugs");
 
 function statusClass(status) {
   return (status || "open").toLowerCase().replace(/\s+/g, "-");
@@ -42,6 +46,39 @@ async function loadBugs() {
   });
 }
 
+async function deleteBugCascade(bugDoc) {
+  const bug = bugDoc.data();
+  const commentsSnap = await getDocs(collection(db, "bugs", bugDoc.id, "comments"));
+  await Promise.all(commentsSnap.docs.map((d) => deleteDoc(d.ref)));
+  await Promise.all(
+    (bug.mediaUrls || [])
+      .filter((media) => media.path)
+      .map((media) => deleteObject(ref(storage, media.path)).catch(() => {}))
+  );
+  await deleteDoc(bugDoc.ref);
+}
+
+async function deleteAllFixedBugs() {
+  if (!confirm("Delete all bugs marked Fixed? This removes their comments and attachments too, and can't be undone.")) {
+    return;
+  }
+  deleteFixedBtn.disabled = true;
+  deleteFixedBtn.textContent = "Deleting…";
+  try {
+    const q = query(collection(db, "bugs"), where("status", "==", "Fixed"));
+    const snap = await getDocs(q);
+    await Promise.all(snap.docs.map((d) => deleteBugCascade(d)));
+    await loadBugs();
+  } catch (err) {
+    alert("Failed to delete fixed bugs: " + err.message);
+  } finally {
+    deleteFixedBtn.disabled = false;
+    deleteFixedBtn.textContent = "Delete all fixed";
+  }
+}
+
 loadBugs().catch((err) => {
   listEl.innerHTML = `<p>Failed to load bug reports: ${escapeHtml(err.message)}</p>`;
 });
+
+deleteFixedBtn.addEventListener("click", deleteAllFixedBugs);
