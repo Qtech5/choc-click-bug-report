@@ -16,5 +16,16 @@ service cloud.firestore {
         allow update: if false;
       }
     }
+
+    match /ideas/{ideaId} {
+      allow read, create, delete: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+        .hasOnly(['votes']);
+
+      match /comments/{commentId} {
+        allow read, create, delete: if true;
+        allow update: if false;
+      }
+    }
   }
 }

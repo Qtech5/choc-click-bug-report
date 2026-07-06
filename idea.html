@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Bug Report — Chocolate Clicker</title>
+<title>Idea — Chocolate Clicker</title>
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -18,18 +18,14 @@
 </header>
 <main>
   <article class="bug-detail">
-    <h2 id="bug-title"></h2>
+    <h2 id="idea-title"></h2>
     <p class="bug-meta">
-      Reported by <strong id="bug-reporter"></strong> —
-      <select id="bug-status">
-        <option value="Open">Open</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Fixed">Fixed</option>
-      </select>
+      Suggested by <strong id="idea-reporter"></strong> —
+      <button id="upvote-btn" class="vote-btn" type="button"><span id="upvote-label">👍 Upvote</span> (<span id="idea-votes">0</span>)</button>
     </p>
-    <p id="bug-description"></p>
-    <div id="bug-media" class="media-grid"></div>
-    <button id="delete-bug" class="delete-btn" type="button">Delete report</button>
+    <p id="idea-description"></p>
+    <div id="idea-media" class="media-grid"></div>
+    <button id="delete-idea" class="delete-btn" type="button">Delete idea</button>
   </article>
 
   <section class="comments">
@@ -44,6 +40,6 @@
     </form>
   </section>
 </main>
-<script type="module" src="js/detail.js"></script>
+<script type="module" src="js/idea-detail.js"></script>
 </body>
 </html>

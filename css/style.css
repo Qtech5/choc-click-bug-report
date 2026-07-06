@@ -49,13 +49,15 @@ main {
   padding: 1.5rem;
 }
 
-.bug-list {
+.bug-list,
+.idea-list {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.bug-item {
+.bug-item,
+.idea-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,8 +69,13 @@ main {
   color: inherit;
 }
 
-.bug-item:hover {
+.bug-item:hover,
+.idea-item:hover {
   border-color: var(--chocolate);
+}
+
+.idea-votes-badge {
+  background: var(--chocolate);
 }
 
 .bug-title {
@@ -176,6 +183,27 @@ main {
   padding: 0.2rem 0.4rem;
   border-radius: 6px;
   border: 1px solid var(--border);
+}
+
+.vote-btn {
+  padding: 0.3rem 0.7rem;
+  background: white;
+  color: var(--chocolate);
+  border: 1px solid var(--chocolate);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.vote-btn:hover:not(:disabled) {
+  background: var(--chocolate);
+  color: white;
+}
+
+.vote-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
 }
 
 .media-grid {
